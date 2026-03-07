@@ -94,10 +94,34 @@ When implementing features, spawn parallel agents:
 - **backend-agent**: API routes, business logic, Express handlers
 - **data-agent**: SQLite schema, migrations, queries
 
-## Task Board
-Tasks live in /tasks directory as markdown files.
-Format: tasks/TASK-001-description.md
-Status tracked in tasks/BOARD.md
+## Task Management
+
+Tasks live in `.claude/tasks/` with a robust lifecycle system designed for long-running multi-agent development.
+
+### Structure
+- **Active tasks**: `.claude/tasks/active/TASK-###-description.md`
+- **Completed tasks**: `.claude/tasks/completed/` (archived to keep context lean)
+- **Ideas**: `.claude/tasks/ideas/` (lightweight proposals for future work)
+- **Board**: `.claude/tasks/BOARD.md` (kanban overview grouped by project)
+- **Projects**: `.claude/tasks/PROJECTS.md` (feature tags and development phases)
+- **Counter**: `.claude/tasks/COUNTER.md` (next available task ID)
+
+### Task Lifecycle
+`Idea -> Backlog -> In Progress -> Review -> Done -> Archived`
+
+### Slash Commands
+- `/create-task` - Create a new task with full metadata
+- `/breakdown-task` - Split a task into domain-specific subtasks
+- `/plan-feature` - Plan an entire feature with epic + subtasks
+- `/sync-board` - Rebuild BOARD.md from actual task file statuses
+- `/archive-done` - Move completed tasks to the completed folder
+
+### Agent Personas
+Agent role definitions live in `.claude/agents/`:
+- `orchestrator.md` - Plans, coordinates, reviews
+- `frontend-agent.md` - React, Tailwind, touch UI
+- `backend-agent.md` - Express, API, business logic
+- `data-agent.md` - SQLite schema, migrations, queries
 
 ## Coding Standards
 - Components go in /src/components
@@ -108,7 +132,8 @@ Status tracked in tasks/BOARD.md
 - No emojis in code comments
 
 ## Opening Instructions
-Read this file and tasks/BOARD.md at the start of every session.
+Read this file and `.claude/tasks/BOARD.md` at the start of every session.
+Check `.claude/tasks/PROJECTS.md` for current phase priorities.
 Before building any UI, apply the Design System consistently.
 Every component should feel like it belongs to the same family.
 When in doubt, go cleaner and add one fun accent rather than
