@@ -6,9 +6,10 @@ on a wall-mounted Android tablet (Fire HD 10). Touchscreen first.
 No external subscriptions. Full data ownership.
 
 ## Tech Stack
-- Frontend: React + Tailwind CSS (kiosk mode, touch optimized)
+- Frontend: React + SCSS (kiosk mode, touch optimized, haptic feedback)
 - Backend: Node.js + Express
-- Database: SQLite (simple, no infra overhead)
+- Database: SQLite (file-based, zero-config, no infra overhead)
+- ORM: TypeORM (Active Record pattern)
 - Calendar: iCal feed parsing (Google/Apple/Outlook compatible)
 - Auth: PIN-based per family member, no passwords for kids
 
@@ -90,25 +91,53 @@ chores, calendar dots, and their PIN tile:
 
 ### Domain Parallel Patterns
 When implementing features, spawn parallel agents:
-- **frontend-agent**: React components, UI, touch interactions
-- **backend-agent**: API routes, business logic, Express handlers
-- **data-agent**: SQLite schema, migrations, queries
+- **frontend-agent**: React components, SCSS styling, touch interactions, haptic feedback
+- **backend-agent**: API routes, app logic, Express handlers, middleware
+- **data-agent**: TypeORM entities (Active Record), migrations, schema
 
-## Task Board
-Tasks live in /tasks directory as markdown files.
-Format: tasks/TASK-001-description.md
-Status tracked in tasks/BOARD.md
+## Task Management
+
+Tasks live in `.claude/tasks/` with a robust lifecycle system designed for long-running multi-agent development.
+
+### Structure
+- **Active tasks**: `.claude/tasks/active/TASK-###-description.md`
+- **Completed tasks**: `.claude/tasks/completed/` (archived to keep context lean)
+- **Ideas**: `.claude/tasks/ideas/` (lightweight proposals for future work)
+- **Board**: `.claude/tasks/BOARD.md` (kanban overview grouped by project)
+- **Projects**: `.claude/tasks/PROJECTS.md` (feature tags and development phases)
+- **Counter**: `.claude/tasks/COUNTER.md` (next available task ID)
+
+### Task Lifecycle
+`Idea -> Backlog -> In Progress -> Review -> Done -> Archived`
+
+### Slash Commands
+- `/create-task` - Create a new task with full metadata
+- `/breakdown-task` - Split a task into domain-specific subtasks
+- `/plan-feature` - Plan an entire feature with epic + subtasks
+- `/sync-board` - Rebuild BOARD.md from actual task file statuses
+- `/archive-done` - Move completed tasks to the completed folder
+
+### Agent Personas
+Agent role definitions live in `.claude/agents/`:
+- `orchestrator.md` - Plans, coordinates, reviews
+- `frontend-agent.md` - React, SCSS, touch UI, haptic feedback
+- `backend-agent.md` - Express, API, app logic, middleware
+- `data-agent.md` - TypeORM entities (Active Record), migrations
 
 ## Coding Standards
 - Components go in /src/components
+- SCSS stylesheets go in /src/styles (variables, mixins, component modules)
 - API routes go in /src/api
-- DB logic goes in /src/db
+- App logic goes in /src/logic
+- TypeORM entities go in /src/db/entities
+- Migrations go in /src/db/migrations
 - No external calendar APIs - parse iCal feeds directly
 - All touch targets minimum 48px
 - No emojis in code comments
 
 ## Opening Instructions
-Read this file and tasks/BOARD.md at the start of every session.
+Read this file and `.claude/tasks/BOARD.md` at the start of every session.
+Check `.claude/tasks/PROJECTS.md` for current phase priorities.
 Before building any UI, apply the Design System consistently.
 Every component should feel like it belongs to the same family.
 When in doubt, go cleaner and add one fun accent rather than
