@@ -1,47 +1,49 @@
-# TASK-003: Build iCal feed parser
+# TASK-003: Calendar System — Two-Way Sync (Epic)
 
 | Field       | Value                |
 |-------------|----------------------|
-| Status      | backlog              |
-| Priority    | medium               |
+| Status      | in-progress          |
+| Priority    | high                 |
 | Project     | calendar             |
 | Parent      | none                 |
-| Assignee    | backend-agent        |
+| Assignee    | orchestrator         |
 | Created     | 2026-03-07           |
 | Updated     | 2026-03-07           |
 
 ## Description
 
-Implement an iCal (.ics) feed parser that can fetch and parse calendar feeds from Google Calendar, Apple Calendar, and Outlook. No external calendar APIs - parse the iCal format directly per project requirements.
+Epic for the full two-way calendar sync system. Supports multiple Google accounts (multiple calendars each), Office 365 for work calendars, event creation with calendar selection, and continuous background sync via polling.
 
-The parser should periodically fetch feeds, extract events, and store them in SQLite for the frontend to query. Each family member can have one or more calendar feeds associated with their profile.
+Architecture: Google Calendar API + Microsoft Graph API with a shared CalendarProvider abstraction. Built-in OAuth flows in the dashboard settings. Background polling every 15 min + manual "Sync Now" button.
 
 ## Acceptance Criteria
 
-- [ ] Parse standard iCal/ICS format (VEVENT components)
-- [ ] Handle recurring events (RRULE)
-- [ ] Fetch feeds from HTTP/HTTPS URLs
-- [ ] Store parsed events in SQLite with family member association
-- [ ] Support Google Calendar, Apple iCloud, and Outlook feed URLs
-- [ ] Periodic background refresh (configurable interval, default 15 min)
-- [ ] API endpoint to get events for a date range, optionally filtered by family member
-- [ ] Graceful error handling for unreachable feeds
+- [ ] Multiple Google accounts can be connected via OAuth
+- [ ] Office 365 account can be connected via OAuth
+- [ ] All calendars from each account are listed and toggleable
+- [ ] Events from all visible calendars display on the calendar view
+- [ ] New events can be created and assigned to a specific calendar
+- [ ] Events sync back to the provider (Google/Microsoft)
+- [ ] Background polling keeps calendars in sync every 15 min
+- [ ] Manual "Sync Now" button triggers immediate refresh
+- [ ] Calendar view supports month/week/day views
 
 ## Subtasks
 
-- [ ] Research iCal format and pick/build parser
-- [ ] Create calendar_feeds and events DB tables
-- [ ] Build feed fetching and parsing logic
-- [ ] Implement recurring event expansion
-- [ ] Create background refresh scheduler
-- [ ] Build events query API endpoint
-- [ ] Add error handling and feed health tracking
+- [ ] TASK-004: Calendar data layer (entities)
+- [ ] TASK-005: Calendar provider interfaces + types
+- [ ] TASK-006: Google Calendar provider
+- [ ] TASK-007: Microsoft Calendar provider
+- [ ] TASK-008: Sync engine + scheduler
+- [ ] TASK-009: Calendar API routes + OAuth endpoints
+- [ ] TASK-010: Calendar settings UI
+- [ ] TASK-011: Calendar view + event creation UI
 
 ## Files Modified
 
-- (to be filled during implementation)
+- (tracked per subtask)
 
 ## Comments
 
 ### 2026-03-07 - orchestrator
-Depends on TASK-001 (project scaffolding). This is primarily a backend-agent task but data-agent should handle the schema. Can be worked on in parallel with TASK-002 once scaffolding is done.
+Rewrote from simple iCal parser to full two-way sync epic. Original TASK-003 scope was read-only iCal feeds — new scope covers multi-provider OAuth, two-way event sync, and full calendar UI. Broken into 8 subtasks (TASK-004 through TASK-011).

@@ -11,9 +11,11 @@
 .header {
   display: flex;
   align-items: center;
-  padding: $space-lg $space-xl;
+  justify-content: space-between;
+  padding: $space-md $space-xl;
   background: $color-surface;
   box-shadow: $shadow-subtle;
+  flex-shrink: 0;
 }
 
 .title {
@@ -22,15 +24,35 @@
   color: $color-primary;
 }
 
-.main {
-  flex: 1;
+.nav {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: $space-sm;
 }
 
-.placeholder {
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-sm $space-lg;
+  border-radius: $radius-pill;
   font-family: $font-kid;
-  font-size: $font-size-kid-preferred;
+  font-size: 16px;
+  font-weight: $font-weight-semibold;
   color: $color-text-secondary;
+  transition: background 150ms ease-out, color 150ms ease-out;
+  min-height: 48px;
+  text-decoration: none;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.navLinkActive {
+  background: $color-primary;
+  color: $color-surface;
+}
+
+.main {
+  flex: 1;
+  overflow: hidden;
 }
