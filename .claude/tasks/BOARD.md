@@ -18,11 +18,12 @@
 
 | Backlog | In Progress | Review | Done |
 |---------|-------------|--------|------|
-| TASK-004: Calendar data layer | TASK-003: Calendar System epic | | |
-| TASK-005: Calendar provider interfaces + types | | | |
-| TASK-006: Google Calendar provider | | | |
-| TASK-007: Microsoft Calendar provider | | | |
-| TASK-008: Sync engine + scheduler | | | |
-| TASK-009: Calendar API routes + OAuth endpoints | | | |
-| TASK-010: Calendar settings UI | | | |
-| TASK-011: Calendar view + event creation UI | | | |
+| | | | TASK-003: Calendar System — Two-Way Sync (Epic) |
+| | | | TASK-004: Calendar data layer |
+| | | | TASK-005: Calendar provider interfaces + types |
+| | | | TASK-006: Google Calendar provider |
+| | | | TASK-007: Microsoft Calendar provider |
+| | | | TASK-008: Sync engine + scheduler |
+| | | | TASK-009: Calendar API routes + OAuth endpoints |
+| | | | TASK-010: Calendar settings UI |
+| | | | TASK-011: Calendar view + event creation UI |

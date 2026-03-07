@@ -2,7 +2,7 @@
 
 | Field       | Value                |
 |-------------|----------------------|
-| Status      | backlog              |
+| Status      | done                 |
 | Priority    | high                 |
 | Project     | calendar             |
 | Parent      | TASK-003             |

@@ -2,7 +2,7 @@
 
 | Field       | Value                |
 |-------------|----------------------|
-| Status      | in-progress          |
+| Status      | done                 |
 | Priority    | high                 |
 | Project     | calendar             |
 | Parent      | none                 |
