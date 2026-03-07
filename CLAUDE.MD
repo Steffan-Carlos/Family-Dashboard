@@ -6,9 +6,10 @@ on a wall-mounted Android tablet (Fire HD 10). Touchscreen first.
 No external subscriptions. Full data ownership.
 
 ## Tech Stack
-- Frontend: React + Tailwind CSS (kiosk mode, touch optimized)
+- Frontend: React + SCSS (kiosk mode, touch optimized, haptic feedback)
 - Backend: Node.js + Express
-- Database: SQLite (simple, no infra overhead)
+- Database: SQLite (file-based, zero-config, no infra overhead)
+- ORM: TypeORM (Active Record pattern)
 - Calendar: iCal feed parsing (Google/Apple/Outlook compatible)
 - Auth: PIN-based per family member, no passwords for kids
 
@@ -90,9 +91,9 @@ chores, calendar dots, and their PIN tile:
 
 ### Domain Parallel Patterns
 When implementing features, spawn parallel agents:
-- **frontend-agent**: React components, UI, touch interactions
-- **backend-agent**: API routes, business logic, Express handlers
-- **data-agent**: SQLite schema, migrations, queries
+- **frontend-agent**: React components, SCSS styling, touch interactions, haptic feedback
+- **backend-agent**: API routes, app logic, Express handlers, middleware
+- **data-agent**: TypeORM entities (Active Record), migrations, schema
 
 ## Task Management
 
@@ -119,14 +120,17 @@ Tasks live in `.claude/tasks/` with a robust lifecycle system designed for long-
 ### Agent Personas
 Agent role definitions live in `.claude/agents/`:
 - `orchestrator.md` - Plans, coordinates, reviews
-- `frontend-agent.md` - React, Tailwind, touch UI
-- `backend-agent.md` - Express, API, business logic
-- `data-agent.md` - SQLite schema, migrations, queries
+- `frontend-agent.md` - React, SCSS, touch UI, haptic feedback
+- `backend-agent.md` - Express, API, app logic, middleware
+- `data-agent.md` - TypeORM entities (Active Record), migrations
 
 ## Coding Standards
 - Components go in /src/components
+- SCSS stylesheets go in /src/styles (variables, mixins, component modules)
 - API routes go in /src/api
-- DB logic goes in /src/db
+- App logic goes in /src/logic
+- TypeORM entities go in /src/db/entities
+- Migrations go in /src/db/migrations
 - No external calendar APIs - parse iCal feeds directly
 - All touch targets minimum 48px
 - No emojis in code comments
