@@ -1,0 +1,128 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  margin-bottom: $space-xl;
+}
+
+.sectionTitle {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  color: $color-text-primary;
+  margin-bottom: $space-md;
+}
+
+.accountGroup {
+  @include card;
+  margin-bottom: $space-md;
+  padding: 0;
+  overflow: hidden;
+}
+
+.accountHeader {
+  @include touch-target($touch-preferred);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-md $space-lg;
+  font-family: $font-kid;
+  font-size: $font-size-kid-min;
+  font-weight: $font-weight-semibold;
+  transition: background $transition-fast;
+
+  &:active {
+    background: rgba($color-primary, 0.05);
+  }
+}
+
+.accountName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.accountEmail {
+  font-size: 13px;
+  font-weight: $font-weight-regular;
+  color: $color-text-secondary;
+}
+
+.chevron {
+  transition: transform $transition-normal;
+
+  &[data-expanded="true"] {
+    transform: rotate(180deg);
+  }
+}
+
+.calendarList {
+  list-style: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.calendarItem {
+  padding: $space-md $space-lg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.calendarLabel {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  cursor: pointer;
+  min-height: $touch-min;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  accent-color: $color-primary;
+}
+
+.colorDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.calendarName {
+  font-size: $font-size-kid-min;
+}
+
+.readOnly {
+  color: $color-text-secondary;
+  font-size: 12px;
+  margin-left: $space-xs;
+}
+
+.colorPicker {
+  display: flex;
+  gap: $space-xs;
+}
+
+.colorOption {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform $transition-fast;
+
+  &[data-selected="true"] {
+    border-color: $color-text-primary;
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

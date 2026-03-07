@@ -1,0 +1,22 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.container {
+  padding: $space-xl;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-family: $font-kid;
+  font-size: 28px;
+  color: $color-text-primary;
+  margin-bottom: $space-xl;
+}
+
+.loading {
+  @include kid-text;
+  color: $color-text-secondary;
+  padding: $space-3xl;
+  text-align: center;
+}

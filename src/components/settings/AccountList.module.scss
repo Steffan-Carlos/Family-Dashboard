@@ -1,0 +1,111 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  margin-bottom: $space-xl;
+}
+
+.sectionTitle {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  color: $color-text-primary;
+  margin-bottom: $space-md;
+}
+
+.addButtons {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+}
+
+.addButton {
+  @include pill-button($color-primary, $color-surface);
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-md $space-lg;
+}
+
+.providerIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  font-weight: $font-weight-bold;
+  font-size: 14px;
+}
+
+.empty {
+  color: $color-text-secondary;
+  font-size: $font-size-kid-min;
+  padding: $space-lg;
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.item {
+  @include card;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-md $space-lg;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.providerBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-kid-min;
+  color: $color-surface;
+
+  &[data-provider="google"] {
+    background: #4285f4;
+  }
+
+  &[data-provider="microsoft"] {
+    background: #00a4ef;
+  }
+}
+
+.displayName {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-kid-min;
+}
+
+.email {
+  color: $color-text-secondary;
+  font-size: 14px;
+}
+
+.disconnectButton {
+  @include touch-target($touch-min);
+  color: $color-secondary;
+  font-weight: $font-weight-semibold;
+  font-size: 14px;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-md;
+  transition: background $transition-fast;
+
+  &:active {
+    background: rgba($color-secondary, 0.1);
+  }
+}

@@ -1,0 +1,119 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  @include card;
+  width: 560px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: $space-xl;
+}
+
+.heading {
+  font-family: $font-kid;
+  font-size: 24px;
+  color: $color-text-primary;
+  margin-bottom: $space-lg;
+}
+
+.field {
+  margin-bottom: $space-md;
+  flex: 1;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  margin-bottom: $space-xs;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: $space-sm $space-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-default;
+  font-family: $font-body;
+  font-size: 16px;
+  color: $color-text-primary;
+  background: $color-background;
+  min-height: $touch-min;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.row {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-md;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: 16px;
+  min-height: $touch-min;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  accent-color: $color-primary;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-top: $space-lg;
+  padding-top: $space-md;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.actionsSpacer {
+  flex: 1;
+}
+
+.cancelButton {
+  @include pill-button($color-surface, $color-text-secondary);
+  box-shadow: $shadow-subtle;
+  font-size: 16px;
+}
+
+.saveButton {
+  @include pill-button($color-primary, $color-surface);
+  font-size: 16px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.deleteButton {
+  @include pill-button($color-secondary, $color-surface);
+  font-size: 16px;
+}

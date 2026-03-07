@@ -1,0 +1,118 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: $space-lg;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-lg;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.navButton {
+  @include touch-target($touch-preferred);
+  font-size: 32px;
+  color: $color-text-primary;
+  border-radius: 50%;
+  transition: background $transition-fast;
+
+  &:active {
+    background: rgba($color-primary, 0.1);
+  }
+}
+
+.title {
+  font-family: $font-kid;
+  font-size: 28px;
+  color: $color-text-primary;
+  min-width: 280px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.todayButton {
+  @include pill-button($color-surface, $color-text-primary);
+  box-shadow: $shadow-subtle;
+  font-size: 16px;
+  padding: $space-sm $space-lg;
+}
+
+.viewToggle {
+  display: flex;
+  background: $color-surface;
+  border-radius: $radius-pill;
+  box-shadow: $shadow-subtle;
+  overflow: hidden;
+}
+
+.viewButton {
+  @include touch-target($touch-min);
+  padding: $space-sm $space-md;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  transition: background $transition-fast, color $transition-fast;
+
+  &[data-active="true"] {
+    background: $color-primary;
+    color: $color-surface;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.monthGrid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekDayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: $space-sm;
+}
+
+.weekDayHeader {
+  text-align: center;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  padding: $space-sm 0;
+}
+
+.daysGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+}
+
+.placeholder {
+  @include kid-text;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-secondary;
+}

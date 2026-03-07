@@ -1,0 +1,50 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.indicator {
+  @include touch-target($touch-min);
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-xs $space-sm;
+  border-radius: $radius-pill;
+  background: $color-surface;
+  box-shadow: $shadow-subtle;
+  transition: background $transition-fast;
+
+  &:active {
+    background: rgba($color-primary, 0.1);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-success;
+
+  &[data-syncing="true"] {
+    background: $color-warning;
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+.label {
+  font-size: 13px;
+  color: $color-text-secondary;
+  font-weight: $font-weight-semibold;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

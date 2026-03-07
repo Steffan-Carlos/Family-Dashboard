@@ -1,0 +1,23 @@
+@use "@/styles/variables" as *;
+
+.select {
+  width: 100%;
+  padding: $space-sm $space-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-default;
+  font-family: $font-body;
+  font-size: 16px;
+  color: $color-text-primary;
+  background: $color-background;
+  min-height: $touch-min;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%237A7A7A' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-md center;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+}

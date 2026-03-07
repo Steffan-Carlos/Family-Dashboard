@@ -1,0 +1,103 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  margin-bottom: $space-xl;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-md;
+}
+
+.sectionTitle {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  color: $color-text-primary;
+}
+
+.syncButton {
+  @include pill-button($color-primary, $color-surface);
+  padding: $space-sm $space-lg;
+  font-size: 16px;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.empty {
+  color: $color-text-secondary;
+  font-size: $font-size-kid-min;
+  padding: $space-lg;
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.item {
+  @include card;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-md $space-lg;
+}
+
+.calInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.calName {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-kid-min;
+}
+
+.calAccount {
+  font-size: 13px;
+  color: $color-text-secondary;
+}
+
+.statusInfo {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-xs $space-sm;
+  border-radius: $radius-pill;
+  font-size: 12px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+
+  &[data-status="ok"] {
+    background: rgba($color-success, 0.2);
+    color: darken($color-success, 30%);
+  }
+
+  &[data-status="error"] {
+    background: rgba($color-secondary, 0.2);
+    color: darken($color-secondary, 20%);
+  }
+
+  &[data-status="pending"] {
+    background: rgba($color-warning, 0.2);
+    color: darken($color-warning, 30%);
+  }
+}
+
+.lastSync {
+  font-size: 14px;
+  color: $color-text-secondary;
+}
