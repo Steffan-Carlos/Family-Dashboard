@@ -1,0 +1,116 @@
+# Family Dashboard - Project Context
+
+## What We're Building
+A self-hosted family calendar and chore tracking app designed to run
+on a wall-mounted Android tablet (Fire HD 10). Touchscreen first.
+No external subscriptions. Full data ownership.
+
+## Tech Stack
+- Frontend: React + Tailwind CSS (kiosk mode, touch optimized)
+- Backend: Node.js + Express
+- Database: SQLite (simple, no infra overhead)
+- Calendar: iCal feed parsing (Google/Apple/Outlook compatible)
+- Auth: PIN-based per family member, no passwords for kids
+
+## Users
+- Parents: full access, manage chores, view all calendars
+- Kids: view their own chores, mark complete, view shared calendar
+
+## Design System
+
+### Vibe
+Clean and modern with fun accents. Think organized enough for
+parents, approachable enough for young kids. Not a toy, not a
+corporate dashboard. Somewhere in between.
+
+### Color Palette
+- Background: #F8F6F2 (warm off-white, never pure white)
+- Surface: #FFFFFF with subtle shadow, not harsh borders
+- Primary: #7BB8A4 (muted sage green)
+- Secondary: #F0A8A0 (soft coral)
+- Accent: #B5A8D5 (muted lavender)
+- Warning: #F5C97A (soft amber)
+- Text primary: #2E2E2E
+- Text secondary: #7A7A7A
+- Success: #A8CFA0 (soft mint green)
+
+### Typography
+- Font: Inter or Nunito (Nunito preferred for kid-facing elements,
+  rounder and friendlier)
+- Headings: bold weight, not heavy
+- Body: regular weight, generous line height (1.6)
+- Kid-facing text: minimum 18px, prefer 22px+
+
+### Touch Targets
+- Minimum 48px, prefer 64px on anything kids will tap
+- Generous padding, nothing cramped
+- Rounded corners everywhere (border-radius: 16px default,
+  24px for cards, full pill for buttons)
+
+### Motion
+- Subtle transitions only (150-200ms ease-out)
+- Chore completion gets a small celebratory animation
+  (confetti burst or checkmark bounce, nothing excessive)
+- No jarring snaps or instant state changes
+
+### Component Personality
+- Chore cards: rounded, pastel background per family member,
+  soft drop shadow
+- Calendar: clean grid, color coded per person using their
+  assigned pastel, no visual noise
+- Buttons: pill shaped, muted fill, slightly darker on press
+- Icons: rounded style (Lucide or Phosphor icon set)
+- Empty states: friendly short message, no walls of text
+
+### Family Member Colors
+Each member gets a personal pastel used consistently across
+chores, calendar dots, and their PIN tile:
+- Assign on first setup, store in DB
+- Suggested palette to pull from: sage, coral, lavender,
+  amber, sky blue, peach
+
+### What to Avoid
+- Pure white backgrounds
+- Hard drop shadows or harsh borders
+- Anything that looks like a generic SaaS app
+- Cluttered layouts, too much on screen at once
+- Small tap targets anywhere a kid might interact
+
+## Sub-Agent Routing Rules
+
+### Parallel dispatch (all conditions must be met)
+- 3+ unrelated tasks or independent domains
+- No shared state between tasks
+- Clear file boundaries with no overlap
+
+### Sequential dispatch (any condition triggers)
+- Tasks have dependencies (B needs output from A)
+- Shared files or state
+- Unclear scope
+
+### Domain Parallel Patterns
+When implementing features, spawn parallel agents:
+- **frontend-agent**: React components, UI, touch interactions
+- **backend-agent**: API routes, business logic, Express handlers
+- **data-agent**: SQLite schema, migrations, queries
+
+## Task Board
+Tasks live in /tasks directory as markdown files.
+Format: tasks/TASK-001-description.md
+Status tracked in tasks/BOARD.md
+
+## Coding Standards
+- Components go in /src/components
+- API routes go in /src/api
+- DB logic goes in /src/db
+- No external calendar APIs - parse iCal feeds directly
+- All touch targets minimum 48px
+- No emojis in code comments
+
+## Opening Instructions
+Read this file and tasks/BOARD.md at the start of every session.
+Before building any UI, apply the Design System consistently.
+Every component should feel like it belongs to the same family.
+When in doubt, go cleaner and add one fun accent rather than
+adding complexity. Work autonomously. Ask only if a decision
+would meaningfully change the architecture.
