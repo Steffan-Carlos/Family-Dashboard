@@ -1,0 +1,59 @@
+// Color Palette
+$color-background: #F8F6F2;
+$color-surface: #FFFFFF;
+$color-primary: #7BB8A4;
+$color-secondary: #F0A8A0;
+$color-accent: #B5A8D5;
+$color-warning: #F5C97A;
+$color-success: #A8CFA0;
+$color-text-primary: #2E2E2E;
+$color-text-secondary: #7A7A7A;
+
+// Family member pastel palette
+$color-sage: #7BB8A4;
+$color-coral: #F0A8A0;
+$color-lavender: #B5A8D5;
+$color-amber: #F5C97A;
+$color-sky: #87CEEB;
+$color-peach: #FFDAB9;
+
+// Typography
+$font-body: "Inter", sans-serif;
+$font-kid: "Nunito", sans-serif;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$line-height-body: 1.6;
+$font-size-base: 16px;
+$font-size-kid-min: 18px;
+$font-size-kid-preferred: 22px;
+
+// Touch targets
+$touch-min: 48px;
+$touch-preferred: 64px;
+
+// Border radius
+$radius-default: 16px;
+$radius-card: 24px;
+$radius-pill: 9999px;
+
+// Shadows
+$shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+// Transitions
+$transition-fast: 150ms ease-out;
+$transition-normal: 200ms ease-out;
+
+// Breakpoints (tablet-first)
+$tablet-width: 1920px;
+$tablet-height: 1200px;
+
+// Spacing scale
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+$space-3xl: 64px;

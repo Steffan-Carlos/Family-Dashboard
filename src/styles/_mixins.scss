@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+// Touch-friendly button base
+@mixin touch-target($size: $touch-preferred) {
+  min-height: $size;
+  min-width: $size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Pill button style
+@mixin pill-button($bg: $color-primary, $text: $color-surface) {
+  @include touch-target;
+  background: $bg;
+  color: $text;
+  border: none;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  font-family: $font-kid;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-kid-min;
+  transition: transform $transition-fast, background $transition-fast;
+
+  &:active {
+    transform: scale(0.97);
+    background: darken($bg, 5%);
+  }
+}
+
+// Card surface
+@mixin card {
+  background: $color-surface;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: $space-lg;
+}
+
+// Kid-friendly text
+@mixin kid-text {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-body;
+}
+
+// Subtle transition for interactive elements
+@mixin interactive {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// Full-screen kiosk layout
+@mixin kiosk-layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: $color-background;
+}

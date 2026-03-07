@@ -2,7 +2,7 @@
 
 | Field       | Value                |
 |-------------|----------------------|
-| Status      | backlog              |
+| Status      | done                 |
 | Priority    | high                 |
 | Project     | project-scaffold     |
 | Parent      | none                 |
@@ -12,34 +12,54 @@
 
 ## Description
 
-Initialize the Family Dashboard project with all foundational files and directory structure. This includes package.json, the React frontend scaffold, Express backend entry point, SQLite database setup, and development tooling (Tailwind, build scripts, dev server).
+Initialize the Family Dashboard project with all foundational files and directory structure. This includes package.json, the React + SCSS frontend scaffold via Vite, Express backend entry point, TypeORM + SQLite database setup, and development tooling.
 
-The goal is a working "hello world" state where `npm run dev` starts both frontend and backend, and the app renders a blank page on the tablet-sized viewport.
+The goal is a working "hello world" state where `npm run dev` starts both frontend and backend, and the app renders a basic shell on the tablet-sized viewport.
 
 ## Acceptance Criteria
 
-- [ ] `package.json` exists with correct dependencies (React, Tailwind, Express, better-sqlite3)
-- [ ] `/src/components/` directory exists with a root `App.jsx`
-- [ ] `/src/api/` directory exists with a basic Express server (`server.js`)
-- [ ] `/src/db/` directory exists with SQLite initialization script
-- [ ] Tailwind CSS configured with the project's design system colors
-- [ ] `npm run dev` starts the app without errors
-- [ ] Basic HTML shell renders at tablet resolution (1920x1200)
+- [x] `package.json` exists with correct dependencies (React, SCSS, Express, TypeORM, better-sqlite3)
+- [x] `/src/components/` directory exists with a root `App.tsx`
+- [x] `/src/styles/` directory exists with SCSS variables, mixins, and global styles matching design system
+- [x] `/src/api/` directory exists with a basic Express server (`server.ts`)
+- [x] `/src/db/` directory exists with TypeORM data source and entity base setup
+- [x] `npm run dev` starts the app without errors (concurrent frontend + backend)
+- [x] Basic HTML shell renders at tablet resolution (1920x1200)
 
 ## Subtasks
 
-- [ ] Create package.json with all dependencies
-- [ ] Set up React with Vite or similar bundler
-- [ ] Configure Tailwind with custom color palette from CLAUDE.MD
-- [ ] Create Express server entry point
-- [ ] Create SQLite database initialization
-- [ ] Set up dev scripts (concurrent frontend + backend)
+- [x] Create package.json with all dependencies
+- [x] Set up React with Vite + TypeScript
+- [x] Configure SCSS with design system color palette, typography, and mixins
+- [x] Create Express server entry point with TypeORM initialization
+- [x] Set up concurrent dev scripts (frontend + backend)
+- [x] Create root App component with basic tablet shell
 
 ## Files Modified
 
-- (to be filled during implementation)
+- `package.json` - Dependencies and scripts
+- `tsconfig.json` - TypeScript config for frontend
+- `tsconfig.node.json` - TypeScript config for backend
+- `vite.config.ts` - Vite config with SCSS, alias, proxy
+- `index.html` - HTML shell with tablet viewport, Google Fonts
+- `.gitignore` - Standard ignores
+- `src/main.tsx` - React entry point
+- `src/vite-env.d.ts` - Vite/SCSS module type declarations
+- `src/components/App.tsx` - Root app shell component
+- `src/components/App.module.scss` - App shell styles
+- `src/styles/_variables.scss` - Design system variables
+- `src/styles/_mixins.scss` - Reusable SCSS mixins
+- `src/styles/global.scss` - Global reset and base styles
+- `src/api/server.ts` - Express server with TypeORM init
+- `src/db/data-source.ts` - TypeORM data source configuration
 
 ## Comments
 
 ### 2026-03-07 - orchestrator
 Initial task created during task management system setup. This is the first task that should be picked up - everything else depends on the project being scaffolded.
+
+### 2026-03-07 - orchestrator
+Updated acceptance criteria for new stack: SCSS instead of Tailwind, TypeORM Active Record instead of raw SQL. Starting implementation.
+
+### 2026-03-07 - orchestrator
+Scaffolding complete. Verified: `vite build` succeeds, backend starts and connects to SQLite, `npm run dev` runs both concurrently. Frontend renders "Family Dashboard" shell with design system colors and fonts.

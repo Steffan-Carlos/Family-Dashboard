@@ -6,7 +6,7 @@
 
 | Backlog | In Progress | Review | Done |
 |---------|-------------|--------|------|
-| TASK-001: Set up project scaffolding | | | |
+| | | | TASK-001: Set up project scaffolding |
 
 ## [auth] Authentication
 
