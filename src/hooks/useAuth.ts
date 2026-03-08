@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 export interface FamilyMember {
   id: number;
@@ -24,6 +24,16 @@ interface AuthState {
   error: string | null;
 }
 
+function mapMember(m: any): FamilyMember {
+  return {
+    id: m.id,
+    name: m.name,
+    role: m.role,
+    color: m.color,
+    avatar: m.avatarEmoji || "",
+  };
+}
+
 export function useAuth() {
   const [state, setState] = useState<AuthState>({
     members: [],
@@ -33,16 +43,20 @@ export function useAuth() {
     error: null,
   });
 
+  // Track whether we're in the middle of setup flow so addMember uses the right endpoint
+  const inSetupFlow = useRef(false);
+
   const fetchMembers = useCallback(async () => {
     try {
       const res = await fetch("/api/auth/members");
       if (!res.ok) throw new Error("Failed to fetch members");
-      const data = await res.json();
-      const members: FamilyMember[] = data.members || [];
+      const json = await res.json();
+      const members: FamilyMember[] = (json.data || []).map(mapMember);
       setState((prev) => ({
         ...prev,
         members,
-        isSetupNeeded: members.length === 0,
+        // Only enter setup mode, never exit it via fetch (setup flow controls that)
+        isSetupNeeded: prev.isSetupNeeded || members.length === 0,
       }));
     } catch {
       setState((prev) => ({
@@ -60,9 +74,12 @@ export function useAuth() {
         setState((prev) => ({ ...prev, currentUser: null }));
         return;
       }
-      const data = await res.json();
-      if (data.user) {
-        setState((prev) => ({ ...prev, currentUser: data.user }));
+      const json = await res.json();
+      if (json.data) {
+        setState((prev) => ({
+          ...prev,
+          currentUser: mapMember(json.data),
+        }));
       }
     } catch {
       setState((prev) => ({ ...prev, currentUser: null }));
@@ -93,8 +110,12 @@ export function useAuth() {
           return false;
         }
 
-        const data = await res.json();
-        setState((prev) => ({ ...prev, currentUser: data.user, error: null }));
+        const json = await res.json();
+        setState((prev) => ({
+          ...prev,
+          currentUser: mapMember(json.data),
+          error: null,
+        }));
         return true;
       } catch {
         setState((prev) => ({ ...prev, error: "Login failed" }));
@@ -122,10 +143,31 @@ export function useAuth() {
       avatar: string;
     }): Promise<boolean> => {
       try {
+        const payload = {
+          name: member.name,
+          role: member.role,
+          pin: member.pin,
+          color: member.color,
+          avatarEmoji: member.avatar,
+        };
+
+        if (inSetupFlow.current) {
+          // During setup, use the unauthenticated setup endpoint
+          const res = await fetch("/api/auth/setup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ members: [payload] }),
+          });
+          if (!res.ok) return false;
+          await fetchMembers();
+          return true;
+        }
+
+        // Authenticated member add (parent only)
         const res = await fetch("/api/auth/members", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(member),
+          body: JSON.stringify(payload),
         });
         if (!res.ok) return false;
         await fetchMembers();
@@ -137,6 +179,20 @@ export function useAuth() {
     [fetchMembers]
   );
 
+  const refreshMembers = useCallback(async () => {
+    // Called when setup flow completes — exit setup mode
+    inSetupFlow.current = false;
+    setState((prev) => ({ ...prev, isSetupNeeded: false }));
+    await fetchMembers();
+  }, [fetchMembers]);
+
+  // Sync the ref with state
+  useEffect(() => {
+    if (state.isSetupNeeded) {
+      inSetupFlow.current = true;
+    }
+  }, [state.isSetupNeeded]);
+
   return {
     members: state.members,
     currentUser: state.currentUser,
@@ -146,6 +202,6 @@ export function useAuth() {
     login,
     logout,
     addMember,
-    refreshMembers: fetchMembers,
+    refreshMembers,
   };
 }

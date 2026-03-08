@@ -95,15 +95,19 @@ authRouter.get("/session", async (req, res) => {
 });
 
 // POST /api/auth/setup — first-run: create initial family members
-// Only works when no members exist yet
+// Only works when no parent exists yet (prevents abuse after setup)
 authRouter.post("/setup", async (req, res) => {
-  const existingCount = await FamilyMember.count();
-  if (existingCount > 0) {
-    res.status(409).json({
-      error: "Family members already exist. Use member management endpoints instead.",
-      code: "ALREADY_SETUP",
-    });
-    return;
+  const parentCount = await FamilyMember.countBy({ role: "parent" });
+  if (parentCount > 0) {
+    // At least one parent exists and is set up — require auth from here on
+    const hasSession = !!req.session.memberId;
+    if (!hasSession) {
+      res.status(409).json({
+        error: "Setup already complete. Log in to manage members.",
+        code: "ALREADY_SETUP",
+      });
+      return;
+    }
   }
 
   const members = req.body.members;
