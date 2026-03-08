@@ -1,0 +1,276 @@
+@use "@/styles/mixins" as *;
+
+.screen {
+  @include kiosk-layout;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  @include card;
+  width: 520px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: $space-xl $space-2xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+}
+
+.heading {
+  font-family: $font-kid;
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  text-align: center;
+}
+
+.addedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  justify-content: center;
+}
+
+.addedChip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-xs $space-md;
+  border-radius: $radius-pill;
+  font-family: $font-kid;
+  font-size: 16px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.stepContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+}
+
+.stepLabel {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  color: $color-text-secondary;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  max-width: 320px;
+  padding: $space-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-default;
+  font-family: $font-kid;
+  font-size: $font-size-kid-min;
+  color: $color-text-primary;
+  background: $color-background;
+  min-height: $touch-min;
+  text-align: center;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+}
+
+.roleOptions {
+  display: flex;
+  gap: $space-md;
+}
+
+.roleButton {
+  @include touch-target($touch-preferred);
+  padding: $space-md $space-xl;
+  border-radius: $radius-card;
+  background: $color-background;
+  border: 2px solid transparent;
+  font-family: $font-kid;
+  font-size: $font-size-kid-min;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: border-color $transition-fast, transform $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.roleButtonActive {
+  border-color: $color-primary;
+  background: rgba($color-primary, 0.1);
+}
+
+.colorGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+  justify-content: center;
+}
+
+.colorSwatch {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform $transition-fast, border-color $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.93);
+  }
+}
+
+.colorSwatchActive {
+  border-color: $color-text-primary;
+  transform: scale(1.1);
+}
+
+.avatarGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.avatarOption {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-default;
+  border: 2px solid transparent;
+  background: $color-background;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color $transition-fast, transform $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.93);
+  }
+}
+
+.avatarOptionActive {
+  border-color: $color-primary;
+  background: rgba($color-primary, 0.1);
+  transform: scale(1.1);
+}
+
+.pinInputWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pinInput {
+  width: 160px;
+  padding: $space-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-default;
+  font-family: $font-kid;
+  font-size: 32px;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  background: $color-background;
+  text-align: center;
+  letter-spacing: 12px;
+  min-height: $touch-preferred;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+
+  &::placeholder {
+    letter-spacing: 12px;
+    color: $color-text-secondary;
+  }
+}
+
+.pinDots {
+  display: flex;
+  gap: $space-md;
+}
+
+.pinDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid $color-text-secondary;
+  background: transparent;
+  transition: background $transition-fast, border-color $transition-fast;
+}
+
+.pinDotFilled {
+  background: $color-primary;
+  border-color: $color-primary;
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-xl;
+  border-radius: $radius-card;
+  min-width: 160px;
+}
+
+.previewAvatar {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.previewName {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.previewRole {
+  font-family: $font-kid;
+  font-size: 16px;
+  color: $color-text-secondary;
+  text-transform: capitalize;
+}
+
+.actions {
+  display: flex;
+  gap: $space-md;
+  justify-content: center;
+  width: 100%;
+}
+
+.primaryButton {
+  @include pill-button($color-primary, $color-surface);
+  font-size: $font-size-kid-min;
+  padding: $space-sm $space-xl;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.secondaryButton {
+  @include pill-button($color-surface, $color-text-secondary);
+  box-shadow: $shadow-subtle;
+  font-size: $font-size-kid-min;
+  padding: $space-sm $space-xl;
+}

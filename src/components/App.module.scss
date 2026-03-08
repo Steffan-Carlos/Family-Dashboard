@@ -56,3 +56,40 @@
   flex: 1;
   overflow: hidden;
 }
+
+.logoutButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-xs $space-md;
+  border-radius: $radius-pill;
+  font-family: $font-kid;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  background: $color-background;
+  min-height: $touch-min;
+  cursor: pointer;
+  border: none;
+  transition: background $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background: darken($color-background, 4%);
+  }
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-background;
+}
+
+.loadingText {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  color: $color-text-secondary;
+}

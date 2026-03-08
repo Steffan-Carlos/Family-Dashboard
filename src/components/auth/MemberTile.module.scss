@@ -1,0 +1,42 @@
+@use "@/styles/mixins" as *;
+
+.tile {
+  @include touch-target($touch-preferred);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  width: 140px;
+  height: 140px;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  border: none;
+  cursor: pointer;
+  padding: $space-md;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: $shadow-subtle;
+  }
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.avatar {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.name {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  text-align: center;
+  line-height: 1.2;
+}

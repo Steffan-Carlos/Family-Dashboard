@@ -13,9 +13,11 @@
   "dependencies": {
     "@azure/msal-node": "^5.0.6",
     "@microsoft/microsoft-graph-client": "^3.0.7",
+    "bcryptjs": "^3.0.3",
     "better-sqlite3": "^11.7.0",
     "dotenv": "^17.3.1",
     "express": "^4.21.0",
+    "express-session": "^1.19.0",
     "googleapis": "^171.4.0",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
@@ -25,8 +27,10 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.2",
     "@types/microsoft-graph": "^2.40.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

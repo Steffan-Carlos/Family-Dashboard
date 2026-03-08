@@ -1,0 +1,219 @@
+@use "@/styles/mixins" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  @include card;
+  width: 380px;
+  max-width: 90vw;
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+  position: relative;
+}
+
+.successModal {
+  box-shadow: 0 4px 20px rgba($color-success, 0.3);
+}
+
+.memberBadge {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-lg;
+  border-radius: $radius-pill;
+}
+
+.memberAvatar {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.memberName {
+  font-family: $font-kid;
+  font-size: $font-size-kid-preferred;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.prompt {
+  font-family: $font-kid;
+  font-size: $font-size-kid-min;
+  color: $color-text-secondary;
+}
+
+.dots {
+  display: flex;
+  gap: $space-md;
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid $color-text-secondary;
+  background: transparent;
+  transition: background $transition-fast, border-color $transition-fast,
+    transform $transition-fast;
+}
+
+.dotFilled {
+  background: $color-primary;
+  border-color: $color-primary;
+  transform: scale(1.1);
+}
+
+.dotError {
+  border-color: $color-secondary;
+
+  &.dotFilled {
+    background: $color-secondary;
+  }
+}
+
+.dotSuccess {
+  border-color: $color-success;
+
+  &.dotFilled {
+    background: $color-success;
+  }
+}
+
+// Success checkmark animation
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+}
+
+.checkmarkSvg {
+  width: 72px;
+  height: 72px;
+}
+
+.checkmarkCircle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: $color-success;
+  animation: checkStroke 0.4s ease-in-out forwards;
+}
+
+.checkmarkPath {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: $color-success;
+  stroke-width: 3;
+  animation: checkStroke 0.3s 0.2s ease-in-out forwards;
+}
+
+@keyframes checkStroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+// Error shake animation
+.shake {
+  animation: shakeAnim 0.5s ease-out;
+}
+
+@keyframes shakeAnim {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-12px);
+  }
+  30% {
+    transform: translateX(10px);
+  }
+  45% {
+    transform: translateX(-8px);
+  }
+  60% {
+    transform: translateX(6px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+
+.pad {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.row {
+  display: flex;
+  gap: $space-sm;
+  justify-content: center;
+}
+
+.key {
+  @include touch-target($touch-preferred);
+  width: $touch-preferred;
+  height: $touch-preferred;
+  border-radius: $radius-pill;
+  background: $color-background;
+  border: none;
+  font-family: $font-kid;
+  font-size: 24px;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: transform $transition-fast, background $transition-fast;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.93);
+    background: darken($color-background, 5%);
+  }
+}
+
+.keyAction {
+  background: transparent;
+  color: $color-text-secondary;
+
+  &:active {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.keySubmit {
+  background: $color-primary;
+  color: $color-surface;
+
+  &:active {
+    background: darken($color-primary, 8%);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.cancelButton {
+  @include pill-button($color-surface, $color-text-secondary);
+  box-shadow: $shadow-subtle;
+  font-size: 16px;
+  margin-top: $space-sm;
+}
